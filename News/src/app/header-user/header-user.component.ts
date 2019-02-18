@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-user.component.scss']
 })
 export class HeaderUserComponent implements OnInit {
+  public thereIsActiveUser: boolean;
+  public activeUser: any;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.thereIsActiveUser = false;
   }
 
+  ngOnInit() {}
 }

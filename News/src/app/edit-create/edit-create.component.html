@@ -1,0 +1,47 @@
+<div id="container">
+  <div id="firt_column" class="column">
+    <div>
+      <div>Title</div>
+      <input
+        type="text"
+        [value]="newsInformation.title ? newsInformation.title : ''"
+      />
+    </div>
+    <div>
+      <div>Short description</div>
+      <input type="text" />
+    </div>
+    <div>
+      <div>Conent</div>
+      <input id="content" type="text" />
+    </div>
+  </div>
+  <div id="second_column" class="column">
+    <div>
+      <div id="radio">
+        <div>Image</div>
+        <input name="image" type="radio" checked /> URL
+        <input name="image" type="radio" /> File
+      </div>
+      <div>
+        <input type="text" />
+      </div>
+    </div>
+    <div>
+      <div>Date</div>
+      <input type="text" />
+    </div>
+    <div>
+      <div>Author</div>
+      <input type="text" />
+    </div>
+    <div>
+      <div>Source URL</div>
+      <input type="text" />
+    </div>
+    <div id="buttons">
+      <button>Save</button>
+      <button (click)="handleCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

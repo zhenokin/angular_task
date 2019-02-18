@@ -10,6 +10,8 @@ import { HeaderSourceComponent } from './header-source/header-source.component';
 import { NewsComponent } from './news/news.component';
 import { NewsSettingsComponent } from './news-settings/news-settings.component';
 import { NewsListComponent } from './news-list/news-list.component';
+import { SingleNewsComponent } from './single-news/single-news.component';
+import { EditCreateComponent } from './edit-create/edit-create.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NewsListComponent } from './news-list/news-list.component';
     HeaderSourceComponent,
     NewsComponent,
     NewsSettingsComponent,
-    NewsListComponent
+    NewsListComponent,
+    SingleNewsComponent,
+    EditCreateComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

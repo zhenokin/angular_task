@@ -1,0 +1,50 @@
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+#container {
+  width: 40vw;
+  height: 35vh;
+  border: 2px solid black;
+  margin: auto;
+  margin-top: 50px;
+  padding: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#first_column {
+  width: 45%;
+}
+
+#second_column {
+  width: 45%;
+}
+
+#radio {
+  flex-direction: row;
+}
+
+#buttons {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+button {
+  width: 70px;
+  height: 30px;
+}
+
+.column {
+  justify-content: space-between;
+}
+
+input {
+  width: 250px;
+}
+
+#content {
+  height: 200px;
+}

@@ -1,5 +1,9 @@
 <div id="container">
-  <img *ngIf="true" alt="U can use image" />
-  <div id="user_name" *ngIf="true">User: {{ user_name }}</div>
-  <button>log in</button>
+  <div id="image"><img *ngIf="thereIsActiveUser" alt="U can use image" /></div>
+  <div id="user">
+    <div id="user_name" *ngIf="thereIsActiveUser">
+      User: {{ activeUser.name }}
+    </div>
+    <button>log in</button>
+  </div>
 </div>

@@ -1,16 +1,17 @@
 #container {
   height: 5%;
   border: 2px solid black;
+  border-bottom: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
-img {
-  vertical-align: middle;
+#user {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
 }
 
-button {
-  float: right;
-}
-
-#user_name {
-  float: right;
+#image {
+  width: 10%;
 }

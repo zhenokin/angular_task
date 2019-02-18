@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+button {
+  height: 5vh;
+  margin-top: 20px;
+}

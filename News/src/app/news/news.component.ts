@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-news',
@@ -6,10 +6,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
-
-  constructor() { }
+  public source: string;
+  public showCreationComponent: boolean;
+  public informationForCreateComponent: any;
+  constructor() {}
 
   ngOnInit() {
+    this.informationForCreateComponent = {};
+    this.showCreationComponent = false;
   }
 
+  onTypeOfSearchChanges(event: string): void {
+    this.source = event;
+  }
+
+  showCreateOrEditNews(information) {
+    this.showCreationComponent = true;
+
+    switch (information.source) {
+      case 'edit':
+        this.showEditComponent(information);
+        break;
+      case 'create':
+        this.showCreateComponent();
+        break;
+    }
+  }
+  showEditComponent(info: any) {
+    this.informationForCreateComponent = Object.assign({}, info);
+  }
+
+  showCreateComponent() {
+    this.informationForCreateComponent = {};
+  }
+
+  closeCreateComponent() {
+    this.showCreationComponent = false;
+  }
 }
