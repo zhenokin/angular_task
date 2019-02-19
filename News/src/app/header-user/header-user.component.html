@@ -1,9 +1,19 @@
 <div id="container">
   <div id="image"><img *ngIf="thereIsActiveUser" alt="U can use image" /></div>
   <div id="user">
-    <div id="user_name" *ngIf="thereIsActiveUser">
-      User: {{ activeUser.name }}
+    <div>
+      <div id="user_name" *ngIf="thereIsActiveUser">
+        User: {{ activeUser.name }}
+      </div>
     </div>
-    <button>log in</button>
+    <div id="buttons">
+      <div>
+        <button (click)="handleLogIn()">
+          log in
+        </button>
+      </div>
+      <div id="or">or</div>
+      <div><button (click)="handleSingUp()">sing up</button></div>
+    </div>
   </div>
 </div>

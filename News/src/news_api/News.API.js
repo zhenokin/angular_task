@@ -38,7 +38,14 @@ class NewsAPI {
 
   moveNewsToLocalBase(news) {}
 
-  saveOrEditNews(news) {}
+  saveOrEditNews(news) {
+    const req = new Request('http://localhost:3000/', {
+      method: 'POST',
+      body: news
+    });
+
+    return fetch(req).then(res => console.log(res));
+  }
 }
 
 const API = new NewsAPI();

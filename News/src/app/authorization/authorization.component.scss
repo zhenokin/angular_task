@@ -1,0 +1,29 @@
+:host {
+  width: 450px;
+  height: 300px;
+  border: 2px solid black;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+#buttons {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#error {
+}
+button {
+  width: 75px;
+  height: 35px;
+}

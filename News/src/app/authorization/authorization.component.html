@@ -1,0 +1,16 @@
+<div id="title">
+  <h3>Enter account name and password for {{ headerText }}</h3>
+</div>
+<div><div id="error"></div></div>
+<div id="name" class="inputs">
+  <div>Account Name</div>
+  <div><input type="text" (change)="onAccountNameChange($event)" /></div>
+</div>
+<div id="pass" class="inputs">
+  <div>Password</div>
+  <div><input type="text" (change)="onPasswordChange($event)" /></div>
+</div>
+<div id="buttons">
+  <button (click)="handleEnter()">Enter</button>
+  <button (click)="handleCancel()">Cancel</button>
+</div>
