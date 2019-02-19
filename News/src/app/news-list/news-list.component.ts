@@ -6,7 +6,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { NewsAPI } from '../../news_api/News.Api.js';
+import { API } from '../../news_api/News.Api.js';
 
 @Component({
   selector: 'app-news-list',
@@ -26,7 +26,7 @@ export class NewsListComponent implements OnInit, OnChanges {
   constructor() {
     this.isEmptySate = true;
     this.isShowLoadMore = false;
-    this.newsAPI = new NewsAPI();
+    this.newsAPI = API;
   }
 
   ngOnInit() {}

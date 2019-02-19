@@ -4,11 +4,12 @@
 <div id="description">
   <div id="title" class="text">{{ title }}</div>
   <div id="desc" class="text">{{ description }}</div>
+  <div><a [href]="url">Read more...</a></div>
 </div>
 <div id="date">
   <div>{{ publishedAt }}</div>
 </div>
 <div id="buttons">
-  <button (click)="handleEditButton()">EDIT</button>
-  <button>Delete</button>
+  <button (click)="handleEditButton()" *ngIf="isLocalNews">EDIT</button>
+  <button *ngIf="isLocalNews">Delete</button>
 </div>

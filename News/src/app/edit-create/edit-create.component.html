@@ -2,45 +2,70 @@
   <div id="firt_column" class="column">
     <div>
       <div>Title</div>
-      <input
-        type="text"
-        [value]="newsInformation.title ? newsInformation.title : ''"
-      />
+      <input type="text" [value]="title" (change)="onTitleChange($event)" />
     </div>
     <div>
       <div>Short description</div>
-      <input type="text" />
+      <input
+        type="text"
+        [value]="description"
+        (change)="onDescriptionChange($event)"
+      />
     </div>
     <div>
       <div>Conent</div>
-      <input id="content" type="text" />
+      <input
+        id="content"
+        type="text"
+        [value]="content"
+        (change)="onContentChange($event)"
+      />
     </div>
   </div>
   <div id="second_column" class="column">
     <div>
       <div id="radio">
         <div>Image</div>
-        <input name="image" type="radio" checked /> URL
-        <input name="image" type="radio" /> File
+        <input
+          name="image"
+          type="radio"
+          (change)="onImageUrlTypeChange($event)"
+          checked
+        />
+        Url
+        <input
+          name="image"
+          type="radio"
+          (change)="onImageUrlTypeChange($event)"
+        />
+        File
       </div>
       <div>
-        <input type="text" />
+        <input
+          type="text"
+          [value]="imageUrl"
+          (change)="onImageUrlChange($event)"
+        />
       </div>
     </div>
     <div>
       <div>Date</div>
-      <input type="text" />
+      <input type="text" [value]="date" (change)="onDateChange($event)" />
     </div>
     <div>
       <div>Author</div>
-      <input type="text" />
+      <input type="text" [value]="author" (change)="onAuthorChange($event)" />
     </div>
     <div>
       <div>Source URL</div>
-      <input type="text" />
+      <input
+        type="text"
+        [value]="sourceUrl"
+        (change)="onSourceUrlChange($event)"
+      />
     </div>
     <div id="buttons">
-      <button>Save</button>
+      <button (click)="handleSave($event, this)">Save</button>
       <button (click)="handleCancel()">Cancel</button>
     </div>
   </div>

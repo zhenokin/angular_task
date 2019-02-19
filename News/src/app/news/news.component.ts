@@ -37,7 +37,15 @@ export class NewsComponent implements OnInit {
   }
 
   showCreateComponent() {
-    this.informationForCreateComponent = {};
+    this.informationForCreateComponent = {
+      title: '',
+      description: '',
+      content: '',
+      imageUrl: '',
+      date: '',
+      author: '',
+      sourceUrl: ''
+    };
   }
 
   closeCreateComponent() {

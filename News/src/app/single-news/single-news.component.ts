@@ -13,6 +13,8 @@ export class SingleNewsComponent implements OnInit {
   public title: string;
   public description: string;
   public publishedAt: string;
+  public url: string;
+  public isLocalNews: boolean;
 
   constructor() {}
 
@@ -21,6 +23,8 @@ export class SingleNewsComponent implements OnInit {
     this.title = this.information.title;
     this.description = this.information.description;
     this.publishedAt = this.information.publishedAt;
+    this.url = this.information.url;
+    this.isLocalNews = this.information.isLocalNews;
   }
 
   handleEditButton() {

@@ -37,6 +37,10 @@ class NewsAPI {
   getAllNews() {}
 
   moveNewsToLocalBase(news) {}
+
+  saveOrEditNews(news) {}
 }
 
-export { NewsAPI };
+const API = new NewsAPI();
+
+export { API };
