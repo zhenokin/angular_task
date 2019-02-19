@@ -1,19 +1,31 @@
 <div id="container">
-  <div id="image"><img *ngIf="thereIsActiveUser" alt="U can use image" /></div>
+  <div>
+    <img
+      id="image"
+      *ngIf="isThereActiveUser"
+      alt="U can use image"
+      [src]="activeUser.imageUrl"
+    />
+  </div>
   <div id="user">
     <div>
-      <div id="user_name" *ngIf="thereIsActiveUser">
+      <div id="user_name" *ngIf="isThereActiveUser">
         User: {{ activeUser.name }}
       </div>
     </div>
     <div id="buttons">
-      <div>
+      <div *ngIf="isThereActiveUser">
+        <button (click)="handleLogOut()">log out</button>
+      </div>
+      <div *ngIf="!isThereActiveUser">
         <button (click)="handleLogIn()">
           log in
         </button>
       </div>
-      <div id="or">or</div>
-      <div><button (click)="handleSingUp()">sing up</button></div>
+      <div id="or" *ngIf="!isThereActiveUser">or</div>
+      <div *ngIf="!isThereActiveUser">
+        <button (click)="handleSingUp()">sing up</button>
+      </div>
     </div>
   </div>
 </div>
