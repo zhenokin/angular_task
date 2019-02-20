@@ -1,25 +1,22 @@
-<div id="container">
+<form id="container" [formGroup]="newsFormGroup">
   <div id="firt_column" class="column">
     <div>
-      <div>Title</div>
-      <input type="text" [value]="title" (change)="onTitleChange($event)" />
+      <div>*Title</div>
+      <input type="text" [formControl]="titleControl" />
     </div>
     <div>
-      <div>Short description</div>
-      <input
-        type="text"
-        [value]="description"
-        (change)="onDescriptionChange($event)"
-      />
+      <div>*Short description</div>
+      <input type="text" [formControl]="descriptionControl" />
     </div>
     <div>
-      <div>Conent</div>
-      <input
+      <div>Content</div>
+      <textarea
         id="content"
         type="text"
-        [value]="content"
-        (change)="onContentChange($event)"
-      />
+        rows="10"
+        cols="33"
+        [formControl]="contentControl"
+      ></textarea>
     </div>
   </div>
   <div id="second_column" class="column">
@@ -28,45 +25,43 @@
         <div>Image</div>
         <input
           name="image"
+          id="url"
           type="radio"
-          (change)="onImageUrlTypeChange($event)"
+          value="url"
+          [formControl]="typeOfImageControl"
           checked
         />
-        Url
+        <label for="url">Url</label>
         <input
           name="image"
           type="radio"
-          (change)="onImageUrlTypeChange($event)"
+          id="file"
+          value="file"
+          [formControl]="typeOfImageControl"
         />
-        File
+        <label for="file">File</label>
       </div>
       <div>
-        <input
-          type="text"
-          [value]="imageUrl"
-          (change)="onImageUrlChange($event)"
-        />
+        <input type="text" [formControl]="imageUrlControl" />
       </div>
     </div>
     <div>
       <div>Date</div>
-      <input type="text" [value]="date" (change)="onDateChange($event)" />
+      <input type="text" [formControl]="dateControl" />
     </div>
     <div>
       <div>Author</div>
-      <input type="text" [value]="author" (change)="onAuthorChange($event)" />
+      <input type="text" [formControl]="authorControl" />
     </div>
     <div>
       <div>Source URL</div>
-      <input
-        type="text"
-        [value]="sourceUrl"
-        (change)="onSourceUrlChange($event)"
-      />
+      <input type="text" [formControl]="sourceUrlControl" />
     </div>
     <div id="buttons">
-      <button (click)="handleSave($event, this)">Save</button>
+      <button (click)="handleSave()" [disabled]="newsFormGroup.invalid">
+        {{ savedButtonText }}
+      </button>
       <button (click)="handleCancel()">Cancel</button>
     </div>
   </div>
-</div>
+</form>

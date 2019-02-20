@@ -2,13 +2,21 @@
   <select (change)="onSearchChanges($event)">
     <option selected disabled> Select source </option>
     <option value="fromWeb"> From web </option>
-    <option value="localNews"> Local news </option>
-    <option value="all"> All news </option>
+    <option value="localNews" *ngIf="shouldDisableLocalNewsSearch">
+      Local news
+    </option>
+    <option value="all" *ngIf="shouldDisableLocalNewsSearch">
+      All news
+    </option>
   </select>
 </div>
 <div id="filter">
-  <input id="input_filter" type="text" />
-  <button>Filter</button>
+  <input id="input_filter" type="text" (change)="onFilterChange($event)" />
+  <button (click)="handleFilter()">Filter</button>
 </div>
 <div><input type="checkbox" />Only created by me</div>
-<div><button (click)="showCreateComponent()">Add Acrticle</button></div>
+<div>
+  <button *ngIf="shouldShowCreateNewsButton" (click)="showCreateComponent()">
+    Add Acrticle
+  </button>
+</div>

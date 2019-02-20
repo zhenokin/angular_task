@@ -21,6 +21,14 @@ export class AuthorizationService {
     this.activeUser = user;
     this.appearedActiveUser.emit(user);
   }
+
+  getUserName(): string {
+    return this.activeUser.name;
+  }
+
+  isThereActiveUser() {
+    return !!this.activeUser;
+  }
   logIn(user: any): Promise<any> {
     return AccAPI.logIn(user);
   }

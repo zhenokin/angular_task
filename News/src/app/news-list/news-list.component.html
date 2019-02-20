@@ -1,4 +1,4 @@
-<div *ngFor="let item of newsForDisplay">
+<div *ngFor="let item of (newsForDisplay | filter: filterValue)">
   <app-single-news
     (editButton)="showCreateComponent($event)"
     [information]="item"

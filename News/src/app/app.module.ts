@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { NewsSettingsComponent } from './news-settings/news-settings.component';
 import { NewsComponent } from './news/news.component';
 import { SingleNewsComponent } from './single-news/single-news.component';
 import { Routes, RouterModule } from '@angular/router';
+import { NewsService } from './news.service';
+import { FilterPipe } from './filter.pipe';
 
 const AppRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,10 +34,17 @@ const AppRoutes: Routes = [
     NewsListComponent,
     SingleNewsComponent,
     EditCreateComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    FilterPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(AppRoutes)],
-  providers: [],
+  imports: [
+    ReactiveFormsModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule.forRoot(AppRoutes)
+  ],
+  providers: [NewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -6,7 +6,8 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { API } from '../../news_api/News.Api.js';
+import { NewsService } from '../news.service.js';
+import { FilterService } from '../filter.service.js';
 
 @Component({
   selector: 'app-news-list',
@@ -19,32 +20,53 @@ export class NewsListComponent implements OnInit, OnChanges {
 
   public isEmptySate: boolean;
   public listOfNews: any;
-  public newsAPI: any;
   public newsForDisplay: any;
   public isShowLoadMore: boolean;
+  public filterValue: string[];
+  public applyFilterBind: any;
 
-  constructor() {
+  private showNewsBind: () => void;
+
+  constructor(private newsAPI: NewsService, private filter: FilterService) {
     this.isEmptySate = true;
     this.isShowLoadMore = false;
-    this.newsAPI = API;
+    this.showNewsBind = this.showNews.bind(this);
+    this.filterValue = [];
+    this.applyFilterBind = this.applyFilter.bind(this);
+
+    this.filter.filterChanges.subscribe(value => {
+      this.filterValue = value;
+      this.applyFilterBind();
+    });
   }
 
   ngOnInit() {}
 
   ngOnChanges() {
     this.isEmptySate = !this.searchSource && !this.listOfNews;
-    console.log(this.newsAPI);
-    this.newsAPI
-      .getNewsBySource(this.searchSource)
-      .then(news => (this.listOfNews = news.articles))
-      .then(this.showNews.bind(this));
+    const req = this.newsAPI.getNewsBySource(this.searchSource);
+    this.newsForDisplay = [];
+    this.isShowLoadMore = false;
+    if (req) {
+      req.subscribe(
+        response => {
+          this.listOfNews = response;
+          this.showNewsBind();
+        },
+        error => console.error(error)
+      );
+    }
+  }
+
+  applyFilter() {
+    this.newsForDisplay = this.listOfNews.slice();
   }
 
   showNews(): void {
-    if (this.listOfNews) {
-      this.isShowLoadMore = true;
+    if (this.listOfNews.length) {
       if (this.listOfNews.length > 5) {
         this.newsForDisplay = this.listOfNews.slice(0, 5);
+        this.isShowLoadMore = true;
       } else {
         this.newsForDisplay = this.listOfNews.slice();
       }

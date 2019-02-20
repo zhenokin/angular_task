@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { API } from '../../news_api/News.API';
-import { TargetLocator } from 'selenium-webdriver';
+import { NewsService } from '../news.service';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { AuthorizationService } from '../authorization.service';
 
 @Component({
   selector: 'app-edit-create',
@@ -11,70 +12,66 @@ export class EditCreateComponent implements OnInit {
   @Input() newsInformation: any;
   @Output() close: EventEmitter<any> = new EventEmitter();
 
-  private title: string;
-  private description: string;
-  private content: string;
-  private imageUrl: string;
-  private date: string;
-  private author: string;
-  private sourceUrl: string;
-  private typeOfImage: string;
-  private newsAPI: any;
+  public titleControl: FormControl = new FormControl('', [Validators.required]);
+  public descriptionControl: FormControl = new FormControl('', [
+    Validators.required
+  ]);
+  public contentControl: FormControl = new FormControl('');
+  public imageUrlControl: FormControl = new FormControl('');
+  public dateControl: FormControl = new FormControl('');
+  public authorControl: FormControl = new FormControl('');
+  public sourceUrlControl: FormControl = new FormControl('');
+  public typeOfImageControl: FormControl = new FormControl('');
+  public newsFormGroup: FormGroup = new FormGroup({
+    title: this.titleControl,
+    description: this.descriptionControl,
+    content: this.contentControl,
+    imageUrl: this.imageUrlControl,
+    date: this.dateControl,
+    author: this.authorControl,
+    sourceUrl: this.sourceUrlControl,
+    typeOfImage: this.typeOfImageControl
+  });
 
-  constructor() {
-    this.newsAPI = API;
-  }
+  public savedButtonText: string;
+
+  constructor(
+    private newsAPI: NewsService,
+    private accService: AuthorizationService
+  ) {}
 
   ngOnInit() {
-    this.title = this.newsInformation.title;
-    this.description = this.newsInformation.description;
-    this.content = this.newsInformation.content;
-    this.imageUrl = this.newsInformation.imageUrl;
-    this.date = this.newsInformation.date;
-    this.author = this.newsInformation.author;
-    this.sourceUrl = this.newsInformation.sourceUrl;
-    this.typeOfImage = 'Url';
+    this.titleControl.setValue(this.newsInformation.title);
+    this.descriptionControl.setValue(this.newsInformation.description);
+    this.contentControl.setValue(this.newsInformation.content);
+    this.imageUrlControl.setValue(this.newsInformation.imageUrl);
+    this.dateControl.setValue(this.newsInformation.date);
+    this.authorControl.setValue(this.newsInformation.author);
+    this.sourceUrlControl.setValue(this.newsInformation.sourceUrl);
+    this.savedButtonText = 'Save';
   }
 
   handleCancel() {
     this.close.emit();
   }
 
-  handleSave(event: any) {
-    this.newsInformation = Object.keys(this.newsInformation).reduce(
-      (mod, key) => {
-        mod[key] = this[key];
-        return mod;
-      },
-      {}
+  handleSave() {
+    const content = this.checkAndEditContent(
+      Object.assign(this.newsInformation, this.newsFormGroup.value)
     );
-    console.log(this.newsInformation);
-    this.newsAPI.saveOrEditNews(this.newsInformation);
+    this.newsAPI
+      .saveOrEditNews(content)
+      .subscribe(() => this.saved(), error => console.error(error));
   }
 
-  onTitleChange(event: any) {
-    this.title = event.target.value;
+  checkAndEditContent(content: any): any {
+    if (!content.author) {
+      content.author = this.accService.getUserName();
+    }
+    content.date = new Date().toISOString();
   }
-  onDescriptionChange(event: any) {
-    this.description = event.target.value;
-    console.log(this.description);
-  }
-  onContentChange(event: any) {
-    this.content = event.target.value;
-  }
-  onImageUrlTypeChange(event: any) {
-    this.typeOfImage = event.target.value;
-  }
-  onImageUrlChange(event: any) {
-    this.imageUrl = event.target.value;
-  }
-  onDateChange(event: any) {
-    this.date = event.target.value;
-  }
-  onAuthorChange(event: any) {
-    this.author = event.target.value;
-  }
-  onSourceUrlChange(event: any) {
-    this.sourceUrl = event.target.value;
+  saved() {
+    this.savedButtonText = 'Done';
+    setTimeout(() => (this.savedButtonText = 'Save'), 2000);
   }
 }
