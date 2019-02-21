@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-news',
@@ -9,7 +10,7 @@ export class NewsComponent implements OnInit {
   public source: string;
   public showCreationComponent: boolean;
   public informationForCreateComponent: any;
-  constructor() {}
+  constructor(public filter: FilterService) {}
 
   ngOnInit() {
     this.informationForCreateComponent = {};

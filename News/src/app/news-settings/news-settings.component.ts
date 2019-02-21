@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
-import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-news-settings',
@@ -10,19 +9,19 @@ import { FilterService } from '../filter.service';
 export class NewsSettingsComponent implements OnInit {
   @Output() typeOfSearch: EventEmitter<string> = new EventEmitter();
   @Output() creationComponent: EventEmitter<any> = new EventEmitter();
+  @Input() filter: any;
 
   public shouldShowCreateNewsButton: boolean;
   public shouldDisableLocalNewsSearch: boolean;
+  public shouldDisableAllNewsSearch: boolean;
   public filterValue: string;
 
-  constructor(
-    private accountsService: AuthorizationService,
-    private filter: FilterService
-  ) {}
+  constructor(private accountsService: AuthorizationService) {}
 
   ngOnInit() {
     this.shouldShowCreateNewsButton = this.accountsService.isThereActiveUser();
     this.shouldDisableLocalNewsSearch = this.accountsService.isThereActiveUser();
+    this.shouldDisableAllNewsSearch = true; // not implement yet
     this.accountsService.appearedActiveUser.subscribe(user => {
       this.shouldShowCreateNewsButton = !!user;
       this.shouldDisableLocalNewsSearch = !!user;

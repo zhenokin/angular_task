@@ -67,4 +67,9 @@ export class NewsService {
       return this.http.put(url, news);
     }
   }
+
+  removeNews(id: number) {
+    const url = 'http://localhost:3000/news' + `/${id}`;
+    return this.http.delete(url);
+  }
 }

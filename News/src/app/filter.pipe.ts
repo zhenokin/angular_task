@@ -11,7 +11,13 @@ export class FilterPipe implements PipeTransform {
           return (
             mod &&
             !Object.keys(item).reduce((m, prop) => {
-              return m || item[prop].toLowerCase().indexOf(word) !== -1;
+              const propValue = item[prop];
+              if (typeof propValue !== 'string') {
+                return m || false;
+              }
+              return (
+                m || propValue.toLowerCase().indexOf(word.toLowerCase()) !== -1
+              );
             }, false)
           );
         }, true);

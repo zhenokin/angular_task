@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-single-news',
@@ -16,7 +17,7 @@ export class SingleNewsComponent implements OnInit {
   public url: string;
   public isLocalNews: boolean;
 
-  constructor() {}
+  constructor(private newsAPI: NewsService) {}
 
   ngOnInit() {
     this.imageUrl = this.information.urlToImage;
@@ -29,5 +30,8 @@ export class SingleNewsComponent implements OnInit {
 
   handleEditButton() {
     this.editButton.emit(Object.assign(this.information, { source: 'edit' }));
+  }
+  handleRemoveButton() {
+    this.newsAPI.removeNews(this.information.id);
   }
 }

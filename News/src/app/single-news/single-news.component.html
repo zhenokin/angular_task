@@ -11,5 +11,5 @@
 </div>
 <div id="buttons">
   <button (click)="handleEditButton()" *ngIf="isLocalNews">EDIT</button>
-  <button *ngIf="isLocalNews">Delete</button>
+  <button (click)="handleRemoveButton()" *ngIf="isLocalNews">Delete</button>
 </div>

@@ -2,11 +2,13 @@
   <app-news-settings
     (creationComponent)="showCreateOrEditNews($event)"
     (typeOfSearch)="onTypeOfSearchChanges($event)"
+    [filter]="filter"
     *ngIf="!showCreationComponent"
   ></app-news-settings>
   <app-news-list
     (creationComponent)="showCreateOrEditNews($event)"
     [searchSource]="source"
+    [filter]="filter"
     *ngIf="!showCreationComponent"
   ></app-news-list>
   <app-edit-create

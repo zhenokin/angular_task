@@ -16,6 +16,7 @@ import { FilterService } from '../filter.service.js';
 })
 export class NewsListComponent implements OnInit, OnChanges {
   @Input() searchSource: string;
+  @Input() filter: any;
   @Output() creationComponent: EventEmitter<any> = new EventEmitter();
 
   public isEmptySate: boolean;
@@ -25,22 +26,22 @@ export class NewsListComponent implements OnInit, OnChanges {
   public filterValue: string[];
   public applyFilterBind: any;
 
-  private showNewsBind: () => void;
+  private showNewsBind: (newsList: any) => void;
 
-  constructor(private newsAPI: NewsService, private filter: FilterService) {
+  constructor(private newsAPI: NewsService) {
     this.isEmptySate = true;
     this.isShowLoadMore = false;
     this.showNewsBind = this.showNews.bind(this);
     this.filterValue = [];
     this.applyFilterBind = this.applyFilter.bind(this);
+  }
 
-    this.filter.filterChanges.subscribe(value => {
+  ngOnInit() {
+    this.filter.filterChanges.subscribe((value: any) => {
       this.filterValue = value;
       this.applyFilterBind();
     });
   }
-
-  ngOnInit() {}
 
   ngOnChanges() {
     this.isEmptySate = !this.searchSource && !this.listOfNews;
@@ -51,7 +52,7 @@ export class NewsListComponent implements OnInit, OnChanges {
       req.subscribe(
         response => {
           this.listOfNews = response;
-          this.showNewsBind();
+          this.showNewsBind(response);
         },
         error => console.error(error)
       );
@@ -59,16 +60,17 @@ export class NewsListComponent implements OnInit, OnChanges {
   }
 
   applyFilter() {
-    this.newsForDisplay = this.listOfNews.slice();
+    this.showNews(this.listOfNews.slice());
   }
 
-  showNews(): void {
-    if (this.listOfNews.length) {
-      if (this.listOfNews.length > 5) {
-        this.newsForDisplay = this.listOfNews.slice(0, 5);
+  showNews(newsList: any): void {
+    if (newsList.length) {
+      if (newsList.length > 5) {
+        this.newsForDisplay = newsList.slice(0, 5);
         this.isShowLoadMore = true;
       } else {
-        this.newsForDisplay = this.listOfNews.slice();
+        this.newsForDisplay = newsList.slice();
+        this.isShowLoadMore = false;
       }
     }
   }

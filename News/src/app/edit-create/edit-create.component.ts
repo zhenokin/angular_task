@@ -69,6 +69,7 @@ export class EditCreateComponent implements OnInit {
       content.author = this.accService.getUserName();
     }
     content.date = new Date().toISOString();
+    return content;
   }
   saved() {
     this.savedButtonText = 'Done';
