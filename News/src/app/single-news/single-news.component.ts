@@ -34,4 +34,11 @@ export class SingleNewsComponent implements OnInit {
   handleRemoveButton() {
     this.newsAPI.removeNews(this.information.id);
   }
+  handleReadMore() {
+    if (this.url) {
+      window.open(this.url);
+    } else {
+      console.log('WillBeImplementLatter')
+    }
+  }
 }

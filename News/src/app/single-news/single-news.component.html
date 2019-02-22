@@ -4,7 +4,7 @@
 <div id="description">
   <div id="title" class="text">{{ title }}</div>
   <div id="desc" class="text">{{ description }}</div>
-  <div><a [href]="url">Read more...</a></div>
+  <div><a (click)="handleReadMore()">Read more...</a></div>
 </div>
 <div id="date">
   <div>{{ publishedAt }}</div>
