@@ -17,10 +17,14 @@ import { SingleNewsComponent } from './single-news/single-news.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NewsService } from './news.service';
 import { FilterPipe } from './filter.pipe';
+import { MoreInfoComponent } from './more-info/more-info.component';
+import { StatusService } from './status.service';
 
 const AppRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'authorization/:action', component: AuthorizationComponent }
+  { path: '', component: NewsComponent },
+  { path: 'authorization/:action', component: AuthorizationComponent },
+  { path: 'moreInfo', component: MoreInfoComponent },
+  { path: 'edit-create', component: EditCreateComponent }
 ];
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ const AppRoutes: Routes = [
     SingleNewsComponent,
     EditCreateComponent,
     AuthorizationComponent,
-    FilterPipe
+    FilterPipe,
+    MoreInfoComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -44,7 +49,7 @@ const AppRoutes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [NewsService],
+  providers: [NewsService, StatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

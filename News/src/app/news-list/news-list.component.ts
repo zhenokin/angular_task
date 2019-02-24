@@ -12,7 +12,8 @@ import { FilterService } from '../filter.service.js';
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  styleUrls: ['./news-list.component.scss'],
+  providers: [FilterService]
 })
 export class NewsListComponent implements OnInit, OnChanges {
   @Input() searchSource: string;

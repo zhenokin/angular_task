@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
 import { ActivatedRoute } from '@angular/router';
+import { StatusService } from '../status.service';
 
 const TEXT = {
   logIn: 'Log in',
@@ -25,10 +26,12 @@ export class AuthorizationComponent implements OnInit {
 
   constructor(
     private accountsService: AuthorizationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private status: StatusService
   ) {}
 
   ngOnInit() {
+    this.status.changeStatus('Authorization');
     this.actionType = this.route.snapshot.params['action'];
     this.headerText = TEXT[this.actionType];
     this.errorText = '';

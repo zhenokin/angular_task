@@ -1,0 +1,35 @@
+:host {
+  border: 2px solid black;
+  width: 60%;
+  height: 500px;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#image {
+  width: 25%;
+}
+
+#info {
+  width: 60%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#buttons {
+  width: 15%;
+}
+
+button {
+  margin-top: 20px;
+  width: 80%;
+}
+
+h2 {
+  margin-bottom: 50px;
+}

@@ -1,20 +1,23 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FilterService } from '../filter.service';
+import { StatusService } from '../status.service';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
+  providers: [FilterService]
 })
 export class NewsComponent implements OnInit {
   public source: string;
   public showCreationComponent: boolean;
   public informationForCreateComponent: any;
-  constructor(public filter: FilterService) {}
+  constructor(public filter: FilterService, private status: StatusService) {}
 
   ngOnInit() {
     this.informationForCreateComponent = {};
     this.showCreationComponent = false;
+    this.status.changeStatus('NEWS');
   }
 
   onTypeOfSearchChanges(event: string): void {

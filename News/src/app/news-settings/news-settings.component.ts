@@ -1,10 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
+import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-news-settings',
   templateUrl: './news-settings.component.html',
-  styleUrls: ['./news-settings.component.scss']
+  styleUrls: ['./news-settings.component.scss'],
+  providers: [FilterService]
 })
 export class NewsSettingsComponent implements OnInit {
   @Output() typeOfSearch: EventEmitter<string> = new EventEmitter();

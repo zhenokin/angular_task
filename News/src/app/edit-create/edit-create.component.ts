@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewsService } from '../news.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthorizationService } from '../authorization.service';
+import { ActivatedRoute } from '@angular/router';
+import { StatusService } from '../status.service';
 
 @Component({
   selector: 'app-edit-create',
@@ -37,10 +39,18 @@ export class EditCreateComponent implements OnInit {
 
   constructor(
     private newsAPI: NewsService,
-    private accService: AuthorizationService
-  ) {}
+    private accService: AuthorizationService,
+    private route: ActivatedRoute,
+    private status: StatusService
+  ) {
+    route.queryParams.subscribe(queryParams => {
+      this.newsInformation = queryParams;
+    });
+  }
 
   ngOnInit() {
+    this.status.changeStatus('Edit-Create');
+
     this.titleControl.setValue(this.newsInformation.title);
     this.descriptionControl.setValue(this.newsInformation.description);
     this.contentControl.setValue(this.newsInformation.content);
